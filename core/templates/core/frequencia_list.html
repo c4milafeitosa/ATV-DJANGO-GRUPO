@@ -1,0 +1,26 @@
+{% extends "core/base.html" %}
+
+{% block title %}Frequências{% endblock %}
+
+{% block content %}
+<h1>Registro de Frequências</h1>
+<a href="{% url 'frequencia_create' %}">Adicionar Nova Frequência</a>
+<table>
+    <thead>
+        <tr>
+            <th>Aluno</th>
+            <th>Turma</th>
+            <th>Presente</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for frequencia in frequencias %}
+        <tr>
+            <td>{{ frequencia.aluno.user.username }}</td>
+            <td>{{ frequencia.turma.nome }}</td>
+            <td>{{ 'Sim' if frequencia.presente else 'Não' }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "core/base.html" %}
+
+{% block title %}Turmas{% endblock %}
+
+{% block content %}
+<h1>Lista de Turmas</h1>
+<a href="{% url 'turma_create' %}">Adicionar Nova Turma</a>
+<table>
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Disciplinas</th>
+            <th>Professores</th>
+            <th>Alunos</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for turma in turmas %}
+        <tr>
+            <td>{{ turma.nome }}</td>
+            <td>{% for disciplina in turma.disciplinas.all %}
+                {{ disciplina.nome }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}</td>
+            <td> {% for professor in turma.professores.all %}
+                {{ professor.nome }}{% if not forloop.last %}, {% endif %}
+            {% endfor %} </td>
+            <td>
+                {% for aluno in turma.alunos.all %}
+                    {{ aluno.user.username }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </td>
+            <td>
+                <a href="{% url 'turma_update' turma.pk %}">Editar</a>
+                <a href="{% url 'turma_delete' turma.pk %}">Excluir</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
