@@ -1,0 +1,26 @@
+{% extends "core/base.html" %}
+
+{% block title %}Notas{% endblock %}
+
+{% block content %}
+<h1>Notas</h1>
+<input type="text" id="searchInput" placeholder="Pesquisar...">
+<table>
+    <thead>
+        <tr>
+            <th>Aluno</th>
+            <th>Turma</th>
+            <th>Nota</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for nota in notas %}
+        <tr>
+            <td>{{ nota.aluno.user.username }}</td>
+            <td>{{ nota.turma.nome }}</td>
+            <td>{{ nota.nota }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
